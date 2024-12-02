@@ -1,3 +1,27 @@
+// Вариант 18. «Прямоугольник» – Rectangle.  
+// Разработать структуру данных Rectangle, представляющую фигуру выровненного по осям 
+// прямоугольника, заданный двумя координатами: соответственно верхней левой и 
+// нижней правой вершины, а также логическим значением square, показывающим является 
+// ли данный прямоугольник квадратом. Должны быть следующие функции:  
+// 1) Создание структуры прямоугольника по координатам его двух вершин. Как результат 
+// возвращается новый прямоугольник. 
+// 2) Перемещение переданного прямоугольника на заданное смещение по оси X и Y. 
+// 3) Изменение ширины и высоты для переданного прямоугольника. 
+// 4) Вычисление пары значений – площади и периметра – для переданного 
+// прямоугольника.  
+// 5) Нахождение прямоугольника минимальной площади, внутрь которого попадают все 
+// точки, переданные в качестве массива. Как результат возвращается новый 
+// прямоугольник. 
+// 6) Нахождение прямоугольника, как пересечение двух других переданных 
+// прямоугольников. Как результат возвращается новый прямоугольник. 
+// 7) Нахождение прямоугольника, вписанного в заданную окружность с координатами 
+// центра x,y и радиусом R. Как результат возвращается новый прямоугольник. 
+// 8) Вывод в консоль переданного прямоугольника в виде: 
+// (0, 5)  (10.5, 5) 
+// (0,0)   (10.5,0) 
+// [square] 
+// где square имеет значение либо «квадрат», либо «прямоугольник». 
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
@@ -15,7 +39,7 @@ typedef struct
 	bool square;   
 } Rectangle;
 
-// 1. 
+// 1. Create structure 
 Rectangle Create_rectangle(point_type x1, point_type y1, point_type x2, point_type y2)
 {
 	Rectangle rect;
@@ -27,7 +51,7 @@ Rectangle Create_rectangle(point_type x1, point_type y1, point_type x2, point_ty
     return rect;
 }
 
-// 2.
+// 2. Move rectangle in the X and Y
 void move_rectangle(Rectangle *rect, point_type dx, point_type dy)
 {
 	rect->x1 += dx; 
@@ -36,7 +60,7 @@ void move_rectangle(Rectangle *rect, point_type dx, point_type dy)
 	rect->y2 += dy; 
 }
 
-// 3.
+// 3. Change the width and height 
 void change_rectangle(Rectangle *rect, point_type new_w, point_type new_h)
 {
 	rect->x2 = rect->x1 + new_w; 
@@ -44,7 +68,7 @@ void change_rectangle(Rectangle *rect, point_type new_w, point_type new_h)
 	rect->square = (absolute_value(new_w) == absolute_value(new_h)); 
 }
 
-// 4. 
+// 4. Calculate area and perimeter
 void calculate(Rectangle *rect, point_type *area, point_type *perimeter)
 {
 	point_type w = absolute_value((rect->x2) - (rect->x1)); 
@@ -53,7 +77,7 @@ void calculate(Rectangle *rect, point_type *area, point_type *perimeter)
     *perimeter = 2 * (w + h); 
 }
 
-// 5. 
+// 5. Finde the minimum area rectangle with all points inside it.
 Rectangle min_rectangle(point_type points[][2], int size)
 {
 	point_type minX = points[0][0];
@@ -72,7 +96,7 @@ Rectangle min_rectangle(point_type points[][2], int size)
     return new_rectangle;
 }
 
-// 6. 
+// 6. Finde a rectangle as the intersection of two rectangles.
 Rectangle intersection_rectangles(Rectangle rect1, Rectangle rect2)
 {
 	point_type x1, y1;
@@ -91,7 +115,7 @@ Rectangle intersection_rectangles(Rectangle rect1, Rectangle rect2)
     return new_rectangle;
 }
 
-// 7. 
+// 7. Finde a rectangle inscribed in a given circle with coordinates center x,y and radius R.
 Rectangle inscribed_circle(point_type x, point_type y, point_type r)
 {
 	point_type side = r * sqrt(2); 
@@ -99,7 +123,7 @@ Rectangle inscribed_circle(point_type x, point_type y, point_type r)
 	return new_rectangle;
 } 
 
-// 8. 
+// 8. Output
 void print_rectangle(Rectangle rect)
 {
 	printf("(%.1f, %.1f)  (%.1f, %.1f)\n", rect.x1, rect.y1, rect.x2, rect.y1);
@@ -110,29 +134,28 @@ void print_rectangle(Rectangle rect)
 // MENU 
 void choose_menu(int *choose)
 {
-	printf("1. \n");
-	printf("2. \n");
-	printf("3. \n");
-	printf("4. \n");
-	printf("5. \n");
-	printf("6. \n");
-	printf("7. \n");
-	printf("8. \n");
-    printf("9. \n");
+	printf("1. Create structure  \n");
+	printf("2. Move rectangle in the X and Y \n");
+	printf("3. Change the width and height \n");
+	printf("4. Calculate area and perimeter \n");
+	printf("5. Finde the minimum area rectangle with all points inside it \n");
+	printf("6. Finde a rectangle as the intersection of two rectangles \n");
+	printf("7. Finde a rectangle inscribed in a given circle with coordinates center x,y and radius R \n");
+	printf("8. Output \n");
+    printf("9. Exit \n");
 	printf("Choose: ");
 	scanf("%d", choose);
 }
 
 int main() {
-	setlocale(LC_ALL, "Russian");
 	int choose;
+	Rectangle rectangle = Create_rectangle(0, 0, 0, 0);
     do{
         do
         {
         choose_menu(&choose);
         }while(choose < 1 || choose > 9);
         
-        Rectangle rectangle = Create_rectangle(0, 0, 0, 0);
         if (choose == 1)
         {
             point_type x1, y1, x2, y2;
