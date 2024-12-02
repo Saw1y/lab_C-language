@@ -123,6 +123,7 @@ void choose_menu(int *choose)
 }
 
 int main() {
+	setlocale(LC_ALL, "Russian");
 	int choose;
 	Rectangle rectangle = Create_rectangle(0, 0, 0, 0);
     do {
