@@ -100,19 +100,22 @@ Rectangle intersection_rectangles(Rectangle rect1, Rectangle rect2)
 {
 	point_type x1, y1;
 	point_type x2, y2;
+
+
 	x1 = rect1.x1 > rect2.x1 ? rect1.x1 : rect2.x1;
 	y1 = rect1.y1 > rect2.y1 ? rect1.y1 : rect2.y1;
-	
 	x2 = rect1.x2 < rect2.x2 ? rect1.x2 : rect2.x2;
 	y2 = rect1.y2 < rect2.y2 ? rect1.y2 : rect2.y2;
-	
-	if (x1 > x2 || y1 < y2) {
-		Rectangle new_rectangle = Create_rectangle(0, 0, 0, 0); // 
-        return new_rectangle;
-    }
+
+	if (x1 > x2 || y1 > y2) {
+		Rectangle new_rectangle = Create_rectangle(0, 0, 0, 0); 
+        return new_rectangle; 
+	}
+
 	Rectangle new_rectangle = Create_rectangle(x1, y1, x2, y2);
     return new_rectangle;
 }
+
 
 // 7. Прямоугольник, вписанный в окружность
 Rectangle inscribed_circle(point_type x, point_type y, point_type r)
