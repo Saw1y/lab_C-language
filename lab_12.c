@@ -23,7 +23,6 @@
 #include <locale.h>
 #include <stdlib.h>
 
-#define MAX_LENGTH  	50
 #define IN_USE 			0x01
 #define NOT_REFUELED 	0x02
 #define RENTED 			0x04
