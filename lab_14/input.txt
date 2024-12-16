@@ -1,0 +1,3 @@
+"Hello world! This is a test." -info
+"Find the longest words here" -create 5
+"Clean this sentence: @#$%!" -delete
